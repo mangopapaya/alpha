@@ -4,6 +4,9 @@
 
 <%= f.input :title %>
 <%= f.input :description %>
+<%= f.input :wage_lower_bound, :label => "Minimum Wage" %>
+<%= f.input :wage_upper_bound, :label => "Maximum Wage" %>
+<%= f.input :contact_email %>
 
   <%= f.submit "Submit" %>
 <% end %>
