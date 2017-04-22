@@ -21,6 +21,11 @@ class JobsController < ApplicationController
 
   def show
     @job = Job.find(params[:id])
+
+    if @job.is_hidden
+      flash[:warning] = "This Job already archived"
+      redirect_to root_path
+    end
   end
 
   def edit
@@ -41,6 +46,20 @@ class JobsController < ApplicationController
 
     @job.destroy
     redirect_to jobs_path
+  end
+
+  def publish
+    @job = Job.find(params[:id])
+    @job.is_hidden = falsh
+    @job.save
+      redirect_to :back
+  end
+
+  def hide
+    @job = Job.find(params[:id])
+    @job.is_hidden = true
+    @job.save
+      redirect_to :back 
   end
 end
 
