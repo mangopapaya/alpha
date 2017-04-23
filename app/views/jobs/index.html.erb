@@ -2,20 +2,51 @@
   <%= link_to("Add a job", new_job_path, :class => "btn btn-default")%>
 </div>
 
+<div class="dropdown clearfix pull-right">
+    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenuDivider" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+      Rank by
+        <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenuDivider">
+        <li>
+          <%= link_to("Minimum Wage", jobs_path(:order => "by_lower_bound")) %>
+        </li>
+        <li>
+          <%= link_to("Maximum Wage", jobs_path(:order => "by_upper_bound"))%>
+        </li>
+        <li>
+          <%= link_to("Time Listed", jobs_path)%>
+        </li>
+      </ul>
+  </div>
+      </body>
 <table class="table table-boldered">
-  <% @jobs.each do |job| %>
+ <thead>
   <tr>
+    <td>Job Position</td>
+    <td>Minimum Salary</td>
+    <td>Maximum Salary</td>
+    <td>Listed at</td>
+  </tr>
+ </thead>
 
+ <tbody>
+   <% @jobs.each do |job|%>
+   <tr>
     <td>
       <%= link_to(job.title, job_path(job)) %>
     </td>
     <td>
-      <%= job.created_at %>
+      <%= link_to(job.wage_lower_bound) %>
     </td>
     <td>
-      <%= link_to("Edit", edit_job_path(job)) %> |
-      <%= link_to("Delete", job_path(job), :method => :delete, :data => { :confirm => "Are you sure?" }) %>
+      <%= link_to(job.wage_upper_bound) %>
     </td>
-  </tr>
-  <% end %>
+    <td>
+      <%= job.created_at %>
+    </td>
+   </tr>
+   <% end %>
+ </tbody>
+
 </table>
